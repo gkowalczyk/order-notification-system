@@ -1,9 +1,11 @@
 package com.example.ordernotificationsystem.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public class OrderEventRequest {
 
     @NotBlank
