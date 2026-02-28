@@ -1,18 +1,19 @@
 package com.example.ordernotificationsystem.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+
 import java.time.Instant;
 import java.util.UUID;
-@RequiredArgsConstructor
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderEventMessage {
 
-    private final UUID eventId;
-    private final String shipmentNumber;
-    private final String recipientEmail;
-    private final String recipientCountry;
-    private final String senderCountry;
-    private final int statusCode;
-    private final Instant receivedAt;
+    private UUID eventId;
+    private String shipmentNumber;
+    private String recipientEmail;
+    private String recipientCountry;
+    private String senderCountry;
+    private int statusCode;
+    private Instant receivedAt;
 }

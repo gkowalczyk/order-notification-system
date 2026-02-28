@@ -1,6 +1,7 @@
 package com.example.ordernotificationsystem.config;
 
 import com.example.ordernotificationsystem.dto.OrderEventMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
