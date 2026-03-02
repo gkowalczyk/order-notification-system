@@ -1,10 +1,56 @@
-# Order Notification System
+
+
+#  Order Notification System
 
 Event-driven service for ingesting high-volume order status updates and
 generating mock email notifications.
 
 **Tech stack:**\
 Spring Boot • Kafka • PostgreSQL • Docker • Resilience4j
+
+------------------------------------------------------------------------
+
+## Public Deployment (VPS)
+
+The application is deployed on a public VPS using Docker and Docker
+Compose.
+
+### Base URL
+
+http://213.199.45.51:18080
+
+------------------------------------------------------------------------
+
+## Verify the deployment
+
+### Health check
+
+``` bash
+curl http://213.199.45.51:18080/actuator/health
+```
+
+Expected response:
+
+``` json
+{
+  "status": "UP"
+}
+```
+
+------------------------------------------------------------------------
+
+### Ingest event
+
+``` bash
+curl -X POST http://213.199.45.51:18080/api/order-events   -H "Content-Type: application/json"   -d '{"shipmentNumber":"ABC123","recipientEmail":"a@b.com","recipientCountry":"PL","senderCountry":"DE","statusCode":10}'
+```
+
+Expected:
+
+    HTTP 202 Accepted
+
+Response contains `eventId`.
+
 
 ------------------------------------------------------------------------
 
