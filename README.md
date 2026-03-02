@@ -122,7 +122,7 @@ Example:
 
 ------------------------------------------------------------------------
 
-##  Throughput Controls (Backpressure & Resilience)
+## Throughput Controls (Backpressure & Resilience)
 
 ### 🔹 Ingest API Rate Limiting
 
