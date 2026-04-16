@@ -165,30 +165,4 @@ Example:
 
     MOCK EMAIL -> to=a@b.com, subject=Shipment ABC123 updated
 
-------------------------------------------------------------------------
-
-## Throughput Controls (Backpressure & Resilience)
-
-### 🔹 Ingest API Rate Limiting
-
-When exceeded:
-
-    HTTP 429 Too Many Requests
-
-------------------------------------------------------------------------
-
-### 🔹 Email Consumer Rate Limiting
-
-Implemented using:
-
--   Resilience4j `RateLimiter`
-
-------------------------------------------------------------------------
-
-### 🔹 Consumer Concurrency
-
-``` properties
-email.consumer.concurrency=1
-```
-
-------------------------------------------------------------------------
+-----------------------------------------------------------------------

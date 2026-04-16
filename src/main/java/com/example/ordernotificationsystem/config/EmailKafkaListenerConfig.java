@@ -15,7 +15,7 @@ public class EmailKafkaListenerConfig {
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, OrderEventMessage> emailKafkaListenerContainerFactory(
             ConsumerFactory<String, OrderEventMessage> consumerFactory,
-            @Value("${email.consumer.concurrency:1}") int concurrency) {
+            @Value("${email.consumer.concurrency:5}") int concurrency) {
         var factory = new ConcurrentKafkaListenerContainerFactory<String, OrderEventMessage>();
         factory.setConsumerFactory(consumerFactory);
         factory.setConcurrency(concurrency);

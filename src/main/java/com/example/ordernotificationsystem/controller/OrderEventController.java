@@ -3,8 +3,6 @@ package com.example.ordernotificationsystem.controller;
 import com.example.ordernotificationsystem.dto.OrderEventRequest;
 import com.example.ordernotificationsystem.dto.OrderEventResponse;
 import com.example.ordernotificationsystem.kafka.OrderEventProducer;
-import io.github.resilience4j.ratelimiter.RateLimiter;
-import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,24 +19,15 @@ import java.util.UUID;
 public class OrderEventController {
 
     private final OrderEventProducer producer;
-    private final RateLimiter ingestRateLimiter;
 
     @PostMapping("/order-events")
     public ResponseEntity<OrderEventResponse> sendOrderEvent(
             @Valid @RequestBody OrderEventRequest request) {
-        try {
-            UUID eventId = UUID.randomUUID();
 
-            Runnable task = RateLimiter.decorateRunnable(
-                    ingestRateLimiter,
-                    () -> producer.publishOrderEvent(eventId, request)
-            );
-            task.run();
+        UUID eventId = UUID.randomUUID();
 
-            return ResponseEntity.accepted()
-                    .body(new OrderEventResponse(eventId));
-        } catch (RequestNotPermitted ex) {
-            return ResponseEntity.status(429).build();
-        }
+        producer.publishOrderEvent(eventId, request);
+        return ResponseEntity.accepted()
+                .body(new OrderEventResponse(eventId));
     }
-    }
+}
